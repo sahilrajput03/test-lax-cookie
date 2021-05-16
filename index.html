@@ -23,6 +23,12 @@
 			1. POST request at (WITH 🍪︎ cookie) `localhost:8080/checkCookie` with
 			fetch
 		</button>
+
+		<button class="with-cookie-button-get-request">
+			1. GET request at (WITH 🍪︎ cookie) `localhost:8080/checkCookie` with
+			fetch
+		</button>
+
 		<button class="without-cookie-button">
 			2. POST request at (without🥝︎ cookie) `localhost:8080/checkCookie` with
 			fetch
@@ -51,6 +57,26 @@
 					fetch('http://localhost:8080/checkCookie', {
 						// 🍪︎ Address of the target server.
 						method: 'POST',
+						credentials: 'include', // 🍪︎ Note: It is important to use ``credentials true`` to be able to send the cookies to the express server.
+					})
+						.then((result) => {
+							// alert(JSON.stringify(result))
+							return result.json()
+						})
+						.then((json) => {
+							alert(JSON.stringify(json, null, 2))
+						})
+						.catch((e) => {
+							alert('error::', e)
+						})
+				})
+			// 1A:: addEventListener to with-cookie-button-get-request
+			document
+				.querySelector('.with-cookie-button-get-request')
+				.addEventListener('click', () => {
+					fetch('http://localhost:8080/checkCookie', {
+						// 🍪︎ Address of the target server.
+						method: 'GET',
 						credentials: 'include', // 🍪︎ Note: It is important to use ``credentials true`` to be able to send the cookies to the express server.
 					})
 						.then((result) => {
